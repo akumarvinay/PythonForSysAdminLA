@@ -1,0 +1,26 @@
+#!/usr/bin/env python3.6
+from argparse import ArgumentParser
+import requests
+
+parser = ArgumentParser(description='Script got getting html response from Given URL')
+parser.add_argument("url",help="Provide URl of website")
+parser.add_argument("filename",help="Provide filename to store output")
+parser.add_argument("--responseFormat",default="HTML",help="Provide response format(Default is HTML)")
+args = parser.parse_args()
+url = args.url
+responseFormat = args.responseFormat
+print(f"Given URl is {url}\nResponse fromat is {responseFormat}")
+#print(dir(response))
+try:
+    response = requests.get(url).json()
+except ConnectionError as e:
+    print(f"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXConnection error {e}")
+    exit(1)
+else:
+    f = open(args.filename, 'w+')
+    f.write(str(response))
+##print(dir(response))
+#print(f"Response code is {response.status_code}")
+#print(f"Response content is {response.text}")
+
+

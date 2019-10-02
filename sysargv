@@ -1,0 +1,4 @@
+#!/usr/bin/env python3.6
+import sys
+print(f"all arguments are  is {sys.argv[1:]}")
+print(f"First arg is {sys.argv[1]}")

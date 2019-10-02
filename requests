@@ -1,0 +1,24 @@
+#!/usr/bin/env python3.6
+import os
+from argparse import ArgumentParser
+import requests
+
+parser = ArgumentParser(description="Script to provide weather information")
+parser.add_argument("zip",help="Zip code of a country to provide weather info")
+parser.add_argument("--country",default="us",help="Country name for weather info, default is us")
+
+args = parser.parse_args()
+API_KEY = os.getenv("MY_API_KEY")
+if not API_KEY:
+    print("Error: No API key provided")
+    exit(1)
+URL = f"http://api.openweathermap.org/data/2.5/weather?zip={args.zip},{args.country}&appid={API_KEY}"
+
+res = requests.get(URL)
+if res.status_code != 200:
+    print("Error: No Info returned")
+    exit(1)
+else:
+    print(res.json())
+    info = res.json()
+    print(f"Area name is {info['name']}")

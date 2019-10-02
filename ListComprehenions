@@ -1,0 +1,17 @@
+#!/usr/bin/env python3.6
+import argparse
+parser = argparse.ArgumentParser(description="to find given word or snnippet in word file")
+parser.add_argument('snipp',help="Provide snippet word full or partial in word")
+args = parser.parse_args()
+print(args.snipp.lower())
+snippet = args.snipp.lower()
+
+with open('/usr/share/dict/words') as f:
+    words = f.readlines()
+matches = []
+
+matches = [word.strip() for word in words if snippet in word.lower()]
+#for word in words:
+#    if snippet in word.lower():
+#        matches.append(word)
+print(matches)

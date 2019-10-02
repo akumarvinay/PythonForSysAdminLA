@@ -1,0 +1,25 @@
+#!/usr/bin/env python3.6
+
+#import time
+
+from time import localtime, strftime, mktime
+"""
+To put our knowledge of the standard library to use, we’re going to read through the time package’s documentation and utilize some of its functions and types to build a stopwatch. We’ll be using the following functions:
+
+    localtime - gives us the time_struct for the current moment
+    strftime - allows us to specify how to represent the time_struct as a string.
+    mktime - converts a time_struct into a numeric value so we can calculate the time difference.
+"""
+start_time = localtime()
+print(f"Timer started at time {strftime('%X', start_time)}")
+
+
+input("Press 'Enter' to stop timer")
+
+end_time = localtime()
+
+print(f"timer stopper at {strftime('%X', end_time)}")
+differ = mktime(end_time) - mktime(start_time)
+
+print(f"Timer was in running state for {differ} seconds")
+

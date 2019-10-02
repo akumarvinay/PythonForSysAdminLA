@@ -1,0 +1,35 @@
+#!/usr/bin/env python3.6
+
+"""
+BMI = weight in kg /(height)**2   -> Metric method
+Imperial BMI = 703 * BMI
+"""
+def gather_facts():
+    weight = float(input("Enter your weight in Pounds or Kilograms "))
+    height = float(input("Enter your height in Metres or Inches "))
+    system = input("Enter the need of system measurements in metric or imperial units (imperial or metric) ").lower().strip()
+    return(weight, height, system)
+
+def bmi_calculate(weight, height, system='metric'):
+    """
+    We are returning Body Mass Index of given height, Weight and Measurement system
+    """
+    if system == 'metric':
+        bmi = (weight / (height ** 2))
+    else:
+        bmi = 703 * (weight / (height ** 2))
+    return bmi
+
+while True:
+    weight,height,system = gather_facts()
+    if system.startswith('i'):
+        bmi = bmi_calculate(weight, system='imperial', height=height)
+        print(f"Your BMI is {bmi}")
+        break
+    elif system.startswith('m'):
+        bmi = bmi_calculate(weight, height)
+        print(f"Your BMI is {bmi}")
+        break
+    else:
+        print("Error: You have entered wrong system measurement type. Use either imperial or metric")
+
